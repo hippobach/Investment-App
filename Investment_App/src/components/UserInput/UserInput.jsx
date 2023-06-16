@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './UserInput.module.scss';
 
@@ -11,12 +12,13 @@ const initialUserInput = {
     duration: 10,
 };
 
-const UserInput = () => {
+const UserInput = (props) => {
     const [userInput, setUserInput] = useState(initialUserInput);
 
     const submitHandler = (event) => {
         event.preventDefault();
-        console.log('Submit');
+
+        props.onCalculate(userInput);
     };
 
     const resetHandler = () => {
@@ -84,6 +86,11 @@ const UserInput = () => {
             </p>
         </form>
     );
+};
+
+// Define propTypes must be in the end of functional component
+UserInput.propTypes = {
+    onCalculate: PropTypes.func.isRequired,
 };
 
 export default UserInput;

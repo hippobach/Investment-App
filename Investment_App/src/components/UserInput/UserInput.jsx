@@ -4,30 +4,55 @@ import styles from './UserInput.module.scss';
 const cx = classNames.bind(styles);
 
 const UserInput = () => {
+    const submitHandler = (event) => {
+        event.preventDefault();
+        console.log('Submit');
+    };
+
+    const resetHandler = () => {
+        console.log('Reset');
+    };
+
+    const inputChangeHandler = (input, value) => {
+        console.log(input, value);
+    };
+
     return (
-        <form className={cx('form')}>
+        <form onSubmit={submitHandler} className={cx('form')}>
             <div className={cx('input-group')}>
                 <p>
                     <label htmlFor="current-savings">Current Savings ($)</label>
-                    <input type="number" id="current-savings" />
+                    <input
+                        onChange={(e) => inputChangeHandler('', e.target.value)}
+                        type="number"
+                        id="current-savings"
+                    />
                 </p>
                 <p>
                     <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-                    <input type="number" id="yearly-contribution" />
+                    <input
+                        onChange={(e) => inputChangeHandler('', e.target.value)}
+                        type="number"
+                        id="yearly-contribution"
+                    />
                 </p>
             </div>
             <div className={cx('input-group')}>
                 <p>
                     <label htmlFor="expected-return">Expected Interest (%, per year)</label>
-                    <input type="number" id="expected-return" />
+                    <input
+                        onChange={(e) => inputChangeHandler('', e.target.value)}
+                        type="number"
+                        id="expected-return"
+                    />
                 </p>
                 <p>
                     <label htmlFor="duration">Investment Duration (years)</label>
-                    <input type="number" id="duration" />
+                    <input onChange={(e) => inputChangeHandler('', e.target.value)} type="number" id="duration" />
                 </p>
             </div>
             <p className={cx('actions')}>
-                <button type="reset" className={cx('buttonAlt')}>
+                <button onClick={resetHandler} type="reset" className={cx('buttonAlt')}>
                     Reset
                 </button>
                 <button type="submit" className={cx('button')}>
